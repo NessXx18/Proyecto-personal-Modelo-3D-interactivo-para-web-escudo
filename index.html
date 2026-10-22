@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Escudo Solar — Taller medieval interactivo</title>
+  <meta name="description" content="Explora un escudo medieval original en 3D. Madera, acero y bronce con texturas PBR y acabados que puedes transformar en tiempo real.">
+  <meta name="theme-color" content="#112624">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="vendor/model-viewer.min.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="masthead"><a class="brand" href="#inicio" aria-label="Taller XIV, inicio"><span class="brand-icon">✧</span> TALLER XIV<span class="brand-line"></span><span class="brand-small">OBJETOS CON HISTORIA</span></a><a class="nav-link" href="#proceso">La pieza <span aria-hidden="true">↗</span></a></header>
+  <main id="inicio">
+    <section class="intro"><div><p class="eyebrow">ESTUDIO DE MATERIALES · Nº 001</p><h1>Escudo <em>Solar</em><span class="title-star" aria-hidden="true">✷</span></h1></div><p class="intro-copy">Madera que resiste. Metal que protege. <br>Una pieza medieval, en tus manos.</p></section>
+    <section class="workbench" aria-label="Visor y personalización del escudo">
+      <div class="stage" id="stage">
+        <div class="stage-top"><span class="status"><i></i><span id="status-label">CARGANDO LA PIEZA</span></span><button class="icon-btn" id="fullscreen" title="Pantalla completa" aria-label="Activar pantalla completa">⛶</button></div>
+        <span class="stage-word" aria-hidden="true">SOLAR</span>
+        <model-viewer id="shield" src="assets/escudo-solar.glb" alt="Escudo circular medieval con cuerpo de madera, borde de acero, 24 remaches y sol de ocho rayos en bronce. La parte trasera tiene un asa elevada." camera-controls touch-action="pan-y" camera-orbit="-18deg 78deg 110%" camera-target="0m 0m 0m" field-of-view="32deg" min-camera-orbit="auto 18deg 60%" max-camera-orbit="auto 162deg 200%" shadow-intensity="0" exposure="1.15" environment-image="neutral" interaction-prompt="none" loading="eager" reveal="auto">
+          <div slot="progress-bar" class="loading" id="loading"><span class="loading-symbol">✷</span><span>Preparando el taller…</span><div class="progress-track"><div id="progress-fill"></div></div></div>
+        </model-viewer>
+        <div id="error" class="error" hidden>No se ha podido cargar la pieza. Recarga la página o descarga el GLB para abrirlo en Blender.</div>
+        <div class="stage-bottom"><span class="gesture"><span aria-hidden="true">⤢</span> Arrastra para girar · Pellizca o usa la rueda para acercar</span><button class="rotate-btn" id="rotate" aria-pressed="false"><span aria-hidden="true">↻</span> Giro automático</button></div>
+        <div class="view-tabs" aria-label="Vistas de cámara"><button class="active" data-view="front" aria-pressed="true">Frente</button><button data-view="back" aria-pressed="false">Reverso</button><button data-view="detail" aria-pressed="false">Detalle</button></div>
+      </div>
+      <aside class="inspector">
+        <div class="inspector-heading"><span class="eyebrow">HAZLO TUYO</span><button id="reset" class="reset" title="Restablecer todos los valores">↺ Restablecer</button></div>
+        <h2>La materia cambia.<br>El carácter permanece.</h2>
+        <fieldset id="controls" disabled>
+          <div class="control-group"><div class="control-title"><label for="wood-color"><span class="control-num">01</span> Madera</label><span class="material-type">ROBLE</span></div><div class="swatches" data-material="madera"><button type="button" class="swatch selected" style="--color:#775034" data-color="#ffffff" aria-label="Roble natural" aria-pressed="true"><span>Natural</span></button><button type="button" class="swatch" style="--color:#492c21" data-color="#96745b" aria-label="Madera nogal" aria-pressed="false"><span>Nogal</span></button><button type="button" class="swatch" style="--color:#343a30" data-color="#727f70" aria-label="Madera ahumada" aria-pressed="false"><span>Ahumado</span></button><label class="custom-color" title="Elegir tinte de madera"><input id="wood-color" type="color" value="#ffffff" data-material="madera" aria-label="Tinte personalizado de madera"><span>＋</span><small>A medida</small></label></div></div>
+          <div class="control-group"><div class="control-title"><label for="steel-color"><span class="control-num">02</span> Borde</label><span class="material-type">ACERO</span></div><div class="swatches" data-material="acero"><button type="button" class="swatch selected" style="--color:#a0a6a5" data-color="#ffffff" aria-label="Acero natural" aria-pressed="true"><span>Forja</span></button><button type="button" class="swatch" style="--color:#4a5354" data-color="#626e74" aria-label="Acero pavonado" aria-pressed="false"><span>Pavonado</span></button><button type="button" class="swatch" style="--color:#9e9275" data-color="#efc384" aria-label="Acero cálido" aria-pressed="false"><span>Cálido</span></button><label class="custom-color" title="Elegir tinte de acero"><input id="steel-color" type="color" value="#ffffff" data-material="acero" aria-label="Tinte personalizado de acero"><span>＋</span><small>A medida</small></label></div></div>
+          <div class="control-group"><div class="control-title"><label for="bronze-color"><span class="control-num">03</span> Emblema</label><span class="material-type">BRONCE</span></div><div class="swatches" data-material="bronce"><button type="button" class="swatch selected" style="--color:#b28b45" data-color="#ffffff" aria-label="Bronce natural" aria-pressed="true"><span>Solar</span></button><button type="button" class="swatch" style="--color:#ab6445" data-color="#ffab82" aria-label="Bronce cobrizo" aria-pressed="false"><span>Cobrizo</span></button><button type="button" class="swatch" style="--color:#486b5c" data-color="#71baa8" aria-label="Bronce con tinte de pátina" aria-pressed="false"><span>Pátina</span></button><label class="custom-color" title="Elegir tinte de bronce"><input id="bronze-color" type="color" value="#ffffff" data-material="bronce" aria-label="Tinte personalizado de bronce"><span>＋</span><small>A medida</small></label></div></div>
+          <div class="control-group finish-group"><div class="control-title"><span>Acabado del metal</span></div><div class="segmented" id="finish"><button class="selected" data-roughness="0.7" aria-pressed="true">Forjado</button><button data-roughness="0.25" aria-pressed="false">Pulido</button><button data-roughness="1" aria-pressed="false">Mate</button></div></div>
+          <div class="light-control"><label for="exposure">Luz del taller</label><output for="exposure" id="exposure-value">115%</output><input id="exposure" type="range" min="60" max="160" value="115" step="5"></div>
+        </fieldset>
+        <a href="assets/escudo-solar.glb" download class="download">Descargar modelo .GLB <span aria-hidden="true">↓</span></a><p class="download-note">Original con texturas incrustadas · <span id="file-size">4,0 MB</span></p>
+        <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+      </aside>
+    </section>
+    <div class="spec-strip"><div><strong id="triangles">5.532</strong><span>TRIÁNGULOS</span></div><div><strong>03</strong><span>MATERIALES PBR</span></div><div><strong>512²</strong><span>PÍXELES POR MAPA</span></div><div><strong>360°</strong><span>PARA EXPLORAR</span></div></div>
+    <section class="story" id="proceso"><div><p class="eyebrow">DISEÑADO PARA TIEMPO REAL</p><h2>Un símbolo antiguo.<br><em>Una nueva dimensión.</em></h2><p>Una interpretación de fantasía medieval: ocho rayos de bronce sobre un cuerpo de roble, protegido por un aro de acero y veinticuatro remaches. Gíralo para descubrir el asa del reverso.</p><p class="story-small">El detalle fino vive en las texturas; la geometría define la silueta. Los tres materiales se pueden transformar de forma independiente.</p></div><div class="process"><details open><summary><span>01 /</span> Forma y UVs <b>+</b></summary><p>Modelado procedural original con bordes biselados, umbo central y asa. Proyección planar para el cuerpo y paramétrica para las piezas circulares. Las piezas repetidas comparten espacio UV.</p></details><details><summary><span>02 /</span> Superficies PBR <b>+</b></summary><p>Base Color, Roughness, Metallic y Normal en 512 × 512 px. El GLB combina rugosidad y metalicidad en una textura: canal G = Roughness, canal B = Metallic. Los normales usan la convención OpenGL.</p></details><details><summary><span>03 /</span> Listo para la web <b>+</b></summary><p>GLB autocontenido con UVs, normales y tangentes. Tres materiales, tres primitivas y controles de apariencia mediante la API de materiales de Google model-viewer.</p></details></div></section>
+  </main>
+  <footer><span class="brand">✧ TALLER XIV</span><span>PROYECTO PERSONAL · MODELADO 3D PARA WEB</span><a href="https://modelviewer.dev/" target="_blank" rel="noopener">Con Google model-viewer ↗</a></footer>
+</body>
+</html>

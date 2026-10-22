@@ -1,0 +1,17 @@
+{
+  "triangulos": 5532,
+  "vertices_exportados": 10524,
+  "materiales": 3,
+  "texturas": "512 × 512 px",
+  "glb_bytes": 1837588,
+  "dimensiones_m": [
+    0.926,
+    0.926,
+    0.317
+  ],
+  "por_material": {
+    "01 · Cuerpo de tablones": 780,
+    "02 · Borde y asa de acero": 1392,
+    "03 · Sol, molduras y remaches de bronce": 3360
+  }
+}
